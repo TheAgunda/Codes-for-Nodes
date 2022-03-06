@@ -78,7 +78,7 @@ app.post("/login", async(req, res) => {
             // Create token
             const token = jwt.sign(
                 { user_id: user._id, email },
-                process.env.TOKEN_KEY,
+                process.env.TOKEN_SECRET,
                 {
                     expiresIn: "1m",
                 }
@@ -88,9 +88,9 @@ app.post("/login", async(req, res) => {
             user.token = token;
             user.save();
             // user
-            res.status(200).json(user);
+          return  res.status(200).json(user);
         }
-        res.status(400).send("Invalid Credentials");
+     return   res.status(400).send("Invalid Credentials");
     } catch (err) {
         console.log(err);
     }
